@@ -79,6 +79,9 @@ const Ships = [
 ]
 
 export default function App() {
+  const sizeShipsArray = Ships.length - 1
+
+  console.log('array size : ', sizeShipsArray)
   return (
     <Tabs display="flex">
       <Flex
@@ -108,14 +111,37 @@ export default function App() {
             <Flex justifyContent="space-between"></Flex>
 
             <RangeSlider aria-label={['min', 'max']} defaultValue={[0, 100]}>
-              <RangeSliderTrack bg="red.100">
-                <RangeSliderFilledTrack bg="blue.500" />
-              </RangeSliderTrack>
-
-              <RangeSliderThumb boxSize={6} index={1}>
+              <RangeSliderTrack bg="red.100"></RangeSliderTrack>
+              <RangeSliderThumb boxSize={6} index={1} bg="blue.100">
                 <Icon color="tomato" as={GiAnchor} position="absolute" />
+                <Text
+                  pos="absolute"
+                  fontSize="0.75rem"
+                  top="-1.5rem"
+                  color="gray.900"
+                >
+                  Partida
+                </Text>
               </RangeSliderThumb>
             </RangeSlider>
+            {Ships.slice(0)
+              .reverse()
+              .map((item, index) => (
+                <Fragment key={item.id}>
+                  <RangeSlider
+                    defaultValue={[0]}
+                    min={0}
+                    max={0}
+                    width="100%"
+                    m="0 auto"
+                  >
+                    <RangeSliderTrack
+                      h="0.3125rem"
+                      bg={index === sizeShipsArray ? '#D2D2D2' : 'blue.500'}
+                    />
+                  </RangeSlider>
+                </Fragment>
+              ))}
           </TabPanel>
           <TabPanel>
             <p>two!</p>
